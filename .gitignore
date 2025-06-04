@@ -1,0 +1,52 @@
+# -----------------------------------------------------------
+# General ignores (across various OS/editors)
+# -----------------------------------------------------------
+.DS_Store           # macOS system files
+*.DS_Store 
+*/*.DS_Store 
+Thumbs.db           # Windows thumbnail cache
+.idea/              # IntelliJ IDEA / PhpStorm project files
+.vscode/            # VS Code project files (if not shared by team)
+*.sublime-project   # Sublime Text project files
+*.sublime-workspace # Sublime Text workspace files
+*.komodoproject     # Komodo Edit/IDE project files
+*.log               # Log files
+*.sqlite            # SQLite databases (if used as temp/local DB)
+*.sql               # SQL dump files (often generated locally)
+*.swp               # Vim swap files
+.sass-cache/        # Sass cache directory
+.vagrant/           # Vagrant local environment files
+
+
+# -----------------------------------------------------------
+# PHP-specific ignores
+# -----------------------------------------------------------
+
+# Composer dependencies
+/vendor/            # Composer's autoloader and installed packages
+
+# Environment variables (critical for security!)
+.env                # Main environment file
+.env.*.local        # Local environment overrides (e.g., .env.development.local)
+.env.local          # General local overrides
+
+# PHP caches and session files
+/tmp/               # General temporary directory (if used for caches, uploads, etc.)
+*.phar              # Phar archives (e.g., composer.phar if directly in project)
+php_errors.log      # PHP error log file
+
+# Built assets / public files (if not part of source)
+# If you build frontend assets (e.g., with Webpack, Vite, Gulp),
+# the output directory should usually be ignored if it's regenerated.
+# Example:
+# /public/build/
+# /web/assets/
+# /dist/
+
+# PHPUnit cache/reports
+.phpunit.cache/
+/coverage/
+
+# Xdebug/Blackfire profiles
+*.xdebug_profile
+*.bkf

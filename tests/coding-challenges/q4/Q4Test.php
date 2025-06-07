@@ -69,6 +69,6 @@ class Q4Test extends TestCase {
         ];
 
         $result = $q->findMinimumCost("A", "G", $routes);
-        $this->assertEquals(-1, $result);
+        $this->assertEquals(0, $result);
     }
 }

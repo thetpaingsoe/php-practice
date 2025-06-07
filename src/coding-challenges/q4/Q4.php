@@ -75,6 +75,6 @@ class Q4 {
             }
         }
 
-        return isset($costs[$end]) ? $costs[$end] : -1;
+        return isset($costs[$end]) ? $costs[$end] : 0;
     }
 }

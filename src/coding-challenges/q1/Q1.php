@@ -18,7 +18,7 @@
 # $output = [[1, 10]];
 
 
-class Solution {
+class Q1 {
     public function mergeIntervals($intervals) {
 
         $merged = [];

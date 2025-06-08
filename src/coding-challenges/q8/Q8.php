@@ -60,8 +60,6 @@ class Q8 {
                             $calQty = $qty - $priceSet['min'] + 1;                            
                         }else if($priceSet['max'] <= $qty) {
                             $calQty = $priceSet['max'] - $priceSet['min'] + 1;                            
-                        }else {
-                            $calQty = $qty - $priceSet['min'] + 1;
                         }
                         $totalPrice += ($calQty * $priceSet['price']);                        
                     }

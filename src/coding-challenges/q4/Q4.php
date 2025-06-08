@@ -74,7 +74,7 @@ class Q4 {
                 }
             }
         }
-
-        return isset($costs[$end]) ? $costs[$end] : 0;
+        
+        return (isset($costs[$end]) && $costs[$end] != INF) ? $costs[$end] : 0;
     }
 }

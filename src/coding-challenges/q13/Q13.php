@@ -32,6 +32,43 @@ Output example:
 
 */
 class Q13 {
+
+    private function formatReturnData($deposits, $total) {
+        return json_encode([
+            'transactions' => $deposits,
+            'total' => $total
+        ]);
+    }
+    private function sortDeposits($deposits) {
+        usort($deposits, function($a, $b) {
+            $dateA = strtotime($a[2]);
+            $dateB = strtotime($b[2]);
+            return $dateA <=> $dateB;
+        });
+
+        return $deposits;
+    }
+
+    private function explodeTransactionData($data) {
+        $transactions = explode(',', $data);
+        if(count($transactions) != 4) return [false, $transactions];
+
+        return [true, $transactions];
+    }
+
+    private function processData($deposits, $total, $data) {
+        $transactionType = $data[0];
+        $amount = $data[3];
+
+        if($transactionType == 'deposit') {
+            $data[3] = (int) $amount; # Convert Amount From String to Int
+            $deposits[] = $data;
+            $total += $amount;
+        }
+
+        return [$total, $deposits];
+    }
+    
     public function getTransactions($csv) {
 
         $lines = explode(PHP_EOL, $csv);        
@@ -40,27 +77,18 @@ class Q13 {
         $total = 0;
         for($i = 1; $i<count($lines); $i++) {
         
-            $transactions = explode(',', $lines[$i]);
-            if(count($transactions) != 4) continue;
-            if($transactions[0] == 'deposit') {
-                $transactions[3] = (int) $transactions[3];
-                $deposits[] = $transactions;
-                $total += $transactions[3];
-            }
+            [$isDataValid, $transactions] = $this->explodeTransactionData($lines[$i]);
+
+            if(!$isDataValid) continue;
+            
+            [$total, $deposits] = $this->processData($deposits, $total, $transactions);
+            
         }
 
-        usort($deposits, function($a, $b) {
-            $dateA = strtotime($a[2]);
-            $dateB = strtotime($b[2]);
-            return $dateA <=> $dateB;
-        });
+        $deposits = $this->sortDeposits($deposits);
         
-        $data = [
-            'transactions' => $deposits,
-            'total' => $total
-        ];
-
-        return json_encode($data);
+        return $this->formatReturnData($deposits, $total);
+        
        
     }
 }
